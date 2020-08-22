@@ -12,7 +12,7 @@ type AnswerObject = {
     correct_answer: string;
 }
 
-const TOTAL_QUESTIONS = 20
+const TOTAL_QUESTIONS = 3
 
 const App = () => {
     const [loading, setLoading] = useState(false)
@@ -51,18 +51,26 @@ const App = () => {
 
             if (correct) setScore(prev => prev + 1)
 
-            const AnswerObject = {
+            const AnswerObject: AnswerObject = {
                 question: questions[number].question,
                 answer,
                 correct,
-                correctAnswer: questions[number].correct_answer
+                correct_answer: questions[number].correct_answer
             }
 
-            setUserAnswers(prev => [...prev, AnswerObject])
+            setUserAnswers((prev) => [...prev, AnswerObject])
         }
     }
 
-    const nextQuestion = () => {}
+    const nextQuestion = () => {
+        const nextQuestion = number + 1
+
+        if (nextQuestion === TOTAL_QUESTIONS) {
+            setGameOver(true)
+        } else {
+            setNumber(nextQuestion)
+        }
+    }
 
     return (
         <div className="App">
